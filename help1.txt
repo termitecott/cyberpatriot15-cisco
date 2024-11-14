@@ -1,0 +1,219 @@
+CyberPatriot Practice Round
+Before you start the exercise, please add your team number and Coach's email to the user profile. Once in Packet Tracer, click on Options --> User Profile. The name is your team number and the email is your Coach's email address. (Example: Name = 11-0000, Email = instructor_roy@ciscorocks.com)
+Reminder: Please ONLY upload one Packet Tracer file (.pka) for grading. If you submit the wrong Packet Tracer file you will get zero points.
+____________________________________________________________________
+Scenario
+You and a few friends have designed a new smartphone app and you need to collaborate with each other as developers. To help with development of the app, you need a server in the lab. You were granted permission to place a server in the lab and to access from a PC on Technology Building network so you can work on the project during your technology class. You have also been asked be the network administrator to configure a new router that was just installed in the Technology Building.
+Your task is to follow the instructions to configure the network devices and add a PC and server to the network.
+A few things to note
+
+School Intranet:
+
+· This object has been locked, which means you do not have control over its behavior and must cater to its configuration.
+· This network has been configured with the EIGRP routing protocol. 
+
+Internet:
+· This object has been locked, which means you do not have control over its behavior and must cater to its configuration.
+
+· Production web server is hosted on the Internet: www.cyberpatriot.org (65.100.10.2)\
+
+· DNS server that all hosts will use is 65.100.10.2
+
+ 
+
+Instructions
+
+NOTE: Do not type the quotation marks when you are prompted to type a command.
+
+ 
+
+1. Configure the Technology Building Router as follows
+
+· Open the CLI on the Technology Building Router.
+
+· If you see a "Continue with configuration dialog? [yes/no], type "no" <enter>
+
+· At the "Router>" prompt, type "enable" <enter>
+
+o This will put you into enable mode (Enable Mode is a privilege level that allows a user to make configuration changes to the router)
+
+· At the "Router#" prompt, type "config t" <enter>
+
+o This will put you into configuration mode - Configuration Terminal – this may be shortened to “conf t” (or “config t”)
+
+· At the "Router(config)#" prompt, type "enable password C1sc0rocks" <enter>
+
+o This sets the password. You will need to remember this password.
+
+· At the "Router(config)#" prompt, type “hostname Technology_Router” <enter>
+
+o This will rename the router hostname
+
+· At the "Technology_Router(config)#" prompt, type "router eigrp 1" <enter>
+
+o This will put you into the routing protocol configuration mode for EIGRP.
+
+· At the "Technology_Router(config-router)#" prompt type "network 64.103.100.0 0.0.0.255" <enter> and "network 100.103.100.0 0.0.0.255" <enter>.
+
+o This will add these two networks to this routers advertisements to share with other neighbor routers.
+
+· At the "Technology_Router(config-router)#" prompt, type “exit” <enter>
+
+o This will exit config-router mode
+
+· At the "Technology_Router(config)#" prompt, type "interface fa0/0" <enter>
+
+o This will put you into the interface config mode.
+
+ 
+
+· At the "Technology_Router(config-if)#" prompt, type "ip address 64.103.100.101 255.255.255.0" <enter>
+
+ 
+
+o This will set the IP address on the router interface
+
+ 
+
+· At the "Technology_Router(config-if)#" prompt, type "no shut" <enter> and then <enter> again
+
+ 
+
+o This will enable the interface. You should see a message stating that the interface changed state to up.
+
+ 
+
+· At the "Technology_Router(config-router)#" prompt, type “exit” <enter>
+
+ 
+
+o This will exit config-if mode
+
+ 
+
+· At the "Technology_Router(config)#" prompt, type "interface fa0/1" <enter>
+
+ 
+
+o This will put you into the interface config mode. We will now assign the selected interface a valid IP address and Subnet Mask
+
+ 
+
+· At the "Technology_Router(config-if)#" prompt, type "ip address 100.103.100.1 255.255.255.0" <enter>
+
+ 
+
+o This will set the IP address on the router interface
+
+ 
+
+· At the "Technology_Router(config-if)#" prompt, type "no shut"
+
+ 
+
+o This will enable the interface. You should see a message stating that the interface changed state to up.
+
+ 
+
+· At the "Technology_Router(config-if)#" prompt, type "end"
+
+ 
+
+· At the "Technology_Router#" prompt, type "write mem"
+
+ 
+
+o This will write the configuration to memory
+
+ 
+
+NOTE: If the commands were entered correctly, the link between the routers and the Intranet Cloud should be green.
+
+NOTE: The Technology Building Switch does not require configuration at this time.
+
+ 
+
+· Take a minute to check your configuration. To see if the configuration is correct, use “show” commands like
+
+
+o show interface (sho int)
+
+o show run
+
+o show ip interface brief (sho ip int br)
+
+ 
+
+2. Add a PC to the Technology Building switch and rename it to "Technology PC1" and connect to any port on the Technology Building Switch. All of these settings can be set on the object properties by double clicking on the object icon.
+
+· Set the IP address to be 100.103.100.2
+
+ 
+
+· Set the subnet mask to 255.255.255.0
+
+ 
+
+· Set the default gateway to 100.103.100.1
+
+ 
+
+· Set the DNS to 65.100.10.2
+
+ 
+
+3. Add a Server to the Lab Building network connected to the switch on any port. All of these settings can be set on the object properties by double clicking on the object icon.
+
+ 
+
+· Rename it to "Lab Server"
+
+ 
+
+· Set the IP address to be 101.101.100.3
+
+ 
+
+· Set the subnet mask to 255.255.255.0
+
+ 
+
+· Set the default gateway to 101.101.100.1
+
+ 
+
+· Set the DNS to 65.100.10.2.
+
+ 
+
+· Enable the FTP server on the server. This has to be enabled by going to the Service tab on the server and then click on the FTP button on the left side, bottom. Make sure it is “on”
+
+ 
+
+4. Test connectivity:
+
+· Browse from Technology PC1 to the production website: http://www.cyberpatriot.org
+
+ 
+
+· To do this you will need to double click on the object and click on the "Desktop" tab at the top of that window. Then click on "Web Browsers" and enter the URL above to see the page.
+
+· From Technology PC1, launch the CLI and FTP to the Lab Server
+
+· To do this you will need to double click on the object and click on the "Desktop" tab at the top of that window. Then, click on "Command Prompt" and at the PC> prompt type “ftp 101.101.100.3” and login with these credentials:
+
+ 
+
+§ Username: cisco
+
+ 
+
+§ password: cisco
+
+· Once you have successfully logged in, close the window.
+
+NOTE: Use ping to test connectivity when things are not working.
+
+Submit Packet Tracer Activity
+
+Once you have completed the activity, make sure to upload it in the Practice Round Competition Course by following the directions on the Packet Tracer page in the course or by using the walkthrough that came with the StartEx email. You will not receive a score for practice round.
